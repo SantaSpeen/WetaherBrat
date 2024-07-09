@@ -1,33 +1,41 @@
+from pathlib import Path
+
 import telebot
-from ruamel.yaml import YAML
+from loguru import logger
 
-from models import Users, DoesNotExist
+from models import db_connect, get_user
+from config import Config
 
-yaml = YAML()
-token = ""
-bot = telebot.TeleBot(token, parse_mode="MARKDOWN")
+logger.info("Starting WetaherBrat...")
+file = Path("config.yml")
+config = Config(file)
+db_connect(config.database)
 
-
-def get_user(user_id):
-    new = False
-    try:
-        user = Users().get(Users.user_id == user_id)
-    except DoesNotExist:
-        user = Users(user_id=user_id)
-        user.save()
-        new = True
-    return user, new
+bot = telebot.TeleBot(config.token, parse_mode="MARKDOWN")
 
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    user, new = get_user(message.from_user.id)
+    print(message)
+    user, new = get_user(message.from_user)
     if new:
-        bot.reply_to(message,
-                     f"Привет, {message.from_user.first_name}. Твой ID: {user.id}\n"
+        bot.reply_to(message,f"Привет, {message.from_user.first_name}. Твой ID: {user.id}\n"
                      "Давай настроем бота для тебя (используй клавиатуру)")
     else:
         bot.reply_to(message, f"Привет, снова?")
+    # if user.lang != message.from_user.language_code:
+    #     bot.send_message(message.from_user.id, f"Ваш язык приложения изменился с {user.lang} на {message.from_user.language_code}. Откуда деньги, буржуй?")
 
 
-bot.infinity_polling()
+if __name__ == '__main__':
+    try:
+        info = bot.get_me()
+        logger.info(f"Bot: {info.first_name}(@{info.username}; id{info.id})")
+    except telebot.apihelper.ApiTelegramException as e:
+        if e.error_code == 401:
+            logger.error("Bad token.")
+        else:
+            raise e
+        exit(1)
+    logger.success("WetaherBrat started.")
+    bot.infinity_polling()
