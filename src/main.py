@@ -19,12 +19,10 @@ def send_welcome(message):
     print(message)
     user, new = get_user(message.from_user)
     if new:
-        bot.reply_to(message,f"Привет, {message.from_user.first_name}. Твой ID: {user.id}\n"
+        bot.reply_to(message, f"Привет, {message.from_user.first_name}. Твой ID: {user.id}\n"
                      "Давай настроем бота для тебя (используй клавиатуру)")
     else:
         bot.reply_to(message, f"Привет, снова?")
-    # if user.lang != message.from_user.language_code:
-    #     bot.send_message(message.from_user.id, f"Ваш язык приложения изменился с {user.lang} на {message.from_user.language_code}. Откуда деньги, буржуй?")
 
 
 if __name__ == '__main__':
