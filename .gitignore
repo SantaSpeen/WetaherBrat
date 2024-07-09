@@ -162,4 +162,5 @@ cython_debug/
 #.idea/
 
 config.yml
+data.db
 _test/
