@@ -1,18 +1,18 @@
-from peewee import SqliteDatabase, Model, IntegerField, CharField
+from peewee import SqliteDatabase, Model, IntegerField, CharField, DoesNotExist
 
-class BasicModel(Model):
-    class Meta:
-        database = SqliteDatabase('base.db')
+db = SqliteDatabase('base.db')
 
-
-class Users(BasicModel):
+class Users(Model):
 
     id = IntegerField(null=True, primary_key=True)
     user_id = IntegerField()
     city = CharField(null=True)
     timezone = IntegerField(default=3)
-    alarm_time = CharField(10)
+    alarm_time = CharField(10, null=True)
 
     class Meta:
-        table_name = 'users'  
+        table_name = 'users'
+        database = db
 
+db.connect()
+db.create_tables([Users])
