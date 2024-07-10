@@ -23,6 +23,7 @@ class Config:
         self.token = None
         self.admin = None
         self.database = None
+        self.i18n = None
         self._load()
 
     def _load(self):
@@ -40,6 +41,8 @@ class Config:
             self.token = self._raw.telegram.token
             self.admin = self._raw.telegram.admin
             self.database = self._raw.database
+            self.i18n = self._raw.i18n
+            self.i18n.yaml = yaml
             if not re.match(r"[0-9]{1,}:[a-zA-Z0-9_-]{35}", self.token):
                 logger.error("Error while loading: Bad telegram token.")
                 exit(1)

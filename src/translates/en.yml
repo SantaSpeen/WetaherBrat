@@ -1,0 +1,5 @@
+_langauge: English
+start: |
+  Hi, {name}. Your ID: {id}
+  Let's configure bot for you!
+start_again: Hi.. Again?
