@@ -1,4 +1,4 @@
-_langauge: Russian
+_language: Russian
 start: |
   Привет, {name}. Твой ID: {id}
   Давай настроем бота под тебя.

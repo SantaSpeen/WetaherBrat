@@ -22,7 +22,7 @@ class I18N:
                 if file.is_file() and file.suffix == ".yml":
                     data = self.yaml.load(file)
                     self._langs[file.stem] = data
-                    self.alias.append([data['_langauge'], file.stem])
+                    self.alias.append([data['_language'], file.stem])
                     logger.success(f"[i18n] {data['_langauge']}({file.stem}) loaded")
             break
 
