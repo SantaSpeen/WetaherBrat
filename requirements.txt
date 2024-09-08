@@ -1,3 +1,6 @@
-peewee
-pyTelegramBotAPI
+peewee~=3.17.6
+pyTelegramBotAPI~=4.22.1
 ruamel.yaml
+loguru~=0.7.2
+easydict~=1.13
+requests~=2.32.3
