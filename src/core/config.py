@@ -41,6 +41,7 @@ class Config:
             self.token = self._raw.telegram.token
             self.admin = self._raw.telegram.admin
             self.database = self._raw.database
+            self.weather = self._raw.weather
             self.i18n = self._raw.i18n
             self.i18n.yaml = yaml
             if not re.match(r"[0-9]{1,}:[a-zA-Z0-9_-]{35}", self.token):
@@ -54,6 +55,9 @@ class Config:
                     telegram:
                       token: BOT_TOKEN_HERE  # Bot token
                       admin: ADMIN_ID  # tg_id of admin user
+                    
+                    weather:
+                        token: OWM_TOKEN_HERE # OpenWeatherMap API token
                     
                     database:
                       type: SQLITE  # SQLITE; MYSQL; PGSQL

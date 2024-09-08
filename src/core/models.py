@@ -6,9 +6,10 @@ class Users(Model):
     id = IntegerField(null=True, primary_key=True)
     user_id = IntegerField()
     lang = CharField(3)
+    state = IntegerField(default=0)
     city = CharField(null=True)
-    timezone = IntegerField(default=3)
-    alarm_time = CharField(10, null=True)
+    timezone = IntegerField(default=10800)
+    alarm_time = CharField(10, null=True, default="8:00")
 
     class Meta:
         table_name = 'users'
@@ -19,7 +20,7 @@ def db_connect(config):
         case "SQLITE":
             db = SqliteDatabase(config.file)
         case _:
-            print("Ты инвалид")
+            logger.error("SQLITE only.. NOW")
             exit(0)
 
     Users._meta.database = db
@@ -36,5 +37,6 @@ def get_user(from_user):
     except DoesNotExist:
         user = Users(user_id=user_id, lang=from_user.language_code)
         user.save()
+        logger.info(f"[users] New user: tg-id: {user_id}; id: {user.id}")
         new = True
     return user, new

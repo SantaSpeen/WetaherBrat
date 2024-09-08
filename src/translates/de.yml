@@ -1,0 +1,26 @@
+_language: German
+start: |
+  Hallo, {name}. Deine ID: {id}
+  Lass uns den Bot für dich konfigurieren!
+start_again: Hallo.. Wieder?
+help: |
+  /help - Zeige diese Nachrichten an
+  /w - Zeige das Wetter an
+  /set time - Ändere die Benachrichtigungszeit
+  /settz - Ändere die Zeitzone
+  /setcity - Ändere die Stadt
+request_city: Gib in der nächsten Nachricht die Stadt an, die im Bot verwendet wird
+request_time: Gib in der nächsten Nachricht die Benachrichtigungszeit an
+request_timezone: |
+  Gib in der nächsten Nachricht die Zeitzone an (aktuelle Zeitzone: {now_timezone})
+not_found_city: Die Stadt wurde nicht gefunden. Bitte gib eine andere an.
+not_found_command: Der Befehl wurde nicht gefunden.
+report_weather: |
+  In der Stadt {city} ist es heute {desc}
+  Temperatur: {temp}°C (gefühlte Temperatur: {feel_temp}°C)
+  Windgeschwindigkeit: {wind}m/s
+saved_city: |
+  Die Stadt wurde gespeichert.
+  Benachrichtigungszeit: {ta} ({tz})
+ready: bereit
+error: Fehler

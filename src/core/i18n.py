@@ -1,3 +1,4 @@
+import datetime
 from pathlib import Path
 
 from loguru import logger
@@ -25,11 +26,12 @@ class I18N:
                     logger.success(f"[i18n] {data['_langauge']}({file.stem}) loaded")
             break
 
-    def get(self, phrase, user, message):
+    def get(self, phrase, user, **kwargs):
         lang = self._langs.get(user.lang)
         if lang:
             p = lang.get(phrase)
             if isinstance(p, str):
-                p = p.format(id=user.id, name=message.from_user.first_name)
+                tz = datetime.timezone(datetime.timedelta(seconds=user.timezone))
+                p = p.format(id=user.id, ta=user.alarm_time, tz=tz.tzname(None), **kwargs)
             return p
         return f"unknown phrase: `{phrase}` (`{user.lang}`)"

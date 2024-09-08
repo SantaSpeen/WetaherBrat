@@ -3,3 +3,23 @@ start: |
   Hi, {name}. Your ID: {id}
   Let's configure bot for you!
 start_again: Hi.. Again?
+help: |
+  /help - Display these messages
+  /w - Display the weather
+  /set time - Change the notification time
+  /settz - Change the time zone
+  /setcity - Change the city
+request_city: In the next message, specify the city that will be used in the bot
+request_time: Specify the time of the notification in the next message
+request_timezone: Specify the time zone in the next message (now {now_timezone})
+not_found_city: The city was not found. Specify another one.
+not_found_command: The command was not found.
+report_weather: |
+  In the city {city} today {desc}
+  Temperature: {temp}°C (feels like {feel_temp}°C)
+  Wind speed: {wind}m/s
+saved_city: |
+  The city has been saved.
+  Notification time: {ta} ({tz})
+ready: ready
+error: error
